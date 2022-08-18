@@ -1,19 +1,30 @@
 package br.ufjf.dcc196.augustocastilho.trabalhofinal;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.util.Date;
 import java.util.List;
 
+@Entity(tableName = "animal")
 public class Animal {
+    @PrimaryKey(autoGenerate =  true)
+    private Long id;
+
+    @ColumnInfo(name = "nome")
     private String nome;
-    private String raca;
+
+    @ColumnInfo(name = "raça")
+    private String raça;
+
+    @ColumnInfo(name = "peso")
     private Integer peso;
-    private Integer nascimento;
+
+    @ColumnInfo(name = "nascimento")
+    private Date nascimento;
+
+    @ColumnInfo(name = "vacinas")
     private List<String> vacinas;
 
-    public Animal(String nome, String raca, Integer peso, Integer nascimento, List<String> vacinas) {
-        this.nome = nome;
-        this.raca = raca;
-        this.peso = peso;
-        this.nascimento = nascimento;
-        this.vacinas = vacinas;
-    }
 }

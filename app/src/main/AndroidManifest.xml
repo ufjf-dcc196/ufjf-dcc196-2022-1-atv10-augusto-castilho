@@ -8,11 +8,20 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="VetHelp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrabalhoFinal"
         tools:targetApi="31">
+        <activity
+            android:name=".AgendarConsulta"
+            android:exported="false" />
+        <activity
+            android:name=".Clinicas"
+            android:exported="false" />
+        <activity
+            android:name=".Cadastrar"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

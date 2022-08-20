@@ -9,8 +9,10 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerPets;
     private AnimalViewModel mAnimalViewModel;
     ActivityResultLauncher<Intent> launcher;
+    private ItemTouchHelper.SimpleCallback touchHelperCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,21 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        touchHelperCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                mAnimalViewModel.deleteAnimal(mAnimalViewModel.getTodosAnimais().getValue().get(position));
+                animalAdapter.notifyItemChanged(position);
+            }
+        };
+        new ItemTouchHelper(touchHelperCallback).attachToRecyclerView(recyclerPets);
     }
 
     public void onClickCadastrar(View view){

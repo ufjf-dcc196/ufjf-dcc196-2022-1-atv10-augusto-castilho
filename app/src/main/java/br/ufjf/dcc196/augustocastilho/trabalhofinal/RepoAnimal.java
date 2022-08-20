@@ -25,4 +25,10 @@ public class RepoAnimal {
             mAnimalDao.insertAnimal(animal);
         });
     }
+
+    void deleteAnimal(Animal animal){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            mAnimalDao.delete(animal);
+        });
+    }
 }

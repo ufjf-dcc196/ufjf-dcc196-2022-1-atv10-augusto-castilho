@@ -1,5 +1,6 @@
 package br.ufjf.dcc196.augustocastilho.trabalhofinal;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -11,12 +12,12 @@ import java.util.List;
 @Dao
 public interface AnimalDao {
     @Insert
-    void insetAnimal (Animal novoAnimal);
+    void insertAnimal (Animal novoAnimal);
 
-    @Query("SELECT * from animal")
-    List<Animal> findAll();
+    @Query("SELECT * FROM animal")
+    LiveData<List<Animal>> findAll();
 
-    @Query("SELECT * from animal WHERE id=:id LIMIT 1 ")
+    @Query("SELECT * FROM animal WHERE id=:id LIMIT 1 ")
     Animal findById(Long id);
 
     @Update
@@ -24,4 +25,7 @@ public interface AnimalDao {
 
     @Delete
     void delete(Animal animal);
+
+    @Query("DELETE FROM animal")
+    void deleteAll();
 }
